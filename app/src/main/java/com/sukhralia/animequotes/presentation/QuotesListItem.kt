@@ -30,7 +30,7 @@ fun QuotesListItem(
     modifier: Modifier = Modifier,
     quote: Quote = Quote(
         "Eren",
-        "If kill all our enemies beyond the sea.. Will we finally be free..?"
+        "If we kill all our enemies beyond the sea.. Will we finally be free..?"
     )
 ) {
     val context = LocalContext.current
@@ -38,8 +38,8 @@ fun QuotesListItem(
             modifier = Modifier
                 .padding(8.dp)
                 .fillMaxWidth()
+                .border(4.dp, Color.Black, shape = RoundedCornerShape(10.dp))
                 .background(color = Color.White, shape = RoundedCornerShape(10.dp))
-                .border(1.dp, Color.Black)
 
         ) {
             Row {
@@ -67,7 +67,7 @@ fun QuotesListItem(
                     contentDescription = "share",
                     modifier = Modifier
                         .padding(horizontal = 10.dp, vertical = 20.dp)
-                        .size(22.dp)
+                        .size(25.dp)
                         .clickable {
                             val sendIntent = Intent().apply {
                                 action = Intent.ACTION_SEND

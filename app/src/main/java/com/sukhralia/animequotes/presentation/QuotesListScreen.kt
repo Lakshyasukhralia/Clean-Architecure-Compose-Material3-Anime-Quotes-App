@@ -1,10 +1,16 @@
 package com.sukhralia.animequotes.presentation
 
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
@@ -23,12 +29,28 @@ fun QuotesListScreen(
     SwipeRefresh(state = swipeRefreshState, onRefresh = {
         viewModel.onEvent(QuotesListEvent.Refresh)
     }) {
-        LazyColumn(modifier = Modifier.fillMaxSize()) {
+        LazyColumn(modifier = Modifier.fillMaxSize().background(color = Color.DarkGray)) {
             items(state.quotes) { quote ->
                 QuotesListItem(quote = quote)
             }
         }
+        if (state.isLoading) CircularProgressBar()
     }
+}
 
-
+@Composable
+private fun CircularProgressBar() {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(10.dp),
+        verticalArrangement = Arrangement.SpaceAround,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        CircularProgressIndicator(
+            modifier = Modifier.size(50.dp),
+            color = Color.Black,
+            strokeWidth = 5.dp,
+        )
+    }
 }
